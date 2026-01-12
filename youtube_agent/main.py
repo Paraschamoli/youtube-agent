@@ -160,7 +160,7 @@ async def initialize_agent() -> None:
         tools=tools,
         description=dedent("""\
             You are an expert YouTube content analyst with a keen eye for detail! 🎓
-            
+
             You specialize in analyzing YouTube videos and creating structured summaries
             with accurate timestamps to make video content easily navigable and searchable.
         """),

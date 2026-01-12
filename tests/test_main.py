@@ -1,7 +1,8 @@
-import pytest
 from unittest.mock import AsyncMock, MagicMock, patch
 
-from youtube_agent.main import handler, APIKeyError
+import pytest
+
+from youtube_agent.main import APIKeyError, handler
 
 
 @pytest.mark.asyncio
@@ -15,8 +16,10 @@ async def test_handler_returns_response():
     mock_response.status = "COMPLETED"
 
     # Mock _initialized to skip initialization and run_agent to return our mock
-    with patch("youtube_agent.main._initialized", True), \
-         patch("youtube_agent.main.run_agent", new_callable=AsyncMock, return_value=mock_response):
+    with (
+        patch("youtube_agent.main._initialized", True),
+        patch("youtube_agent.main.run_agent", new_callable=AsyncMock, return_value=mock_response),
+    ):
         result = await handler(messages)
 
     # Verify we get a result back
@@ -36,8 +39,10 @@ async def test_handler_with_multiple_messages():
     mock_response = MagicMock()
     mock_response.run_id = "test-run-id-2"
 
-    with patch("youtube_agent.main._initialized", True), \
-         patch("youtube_agent.main.run_agent", new_callable=AsyncMock, return_value=mock_response) as mock_run:
+    with (
+        patch("youtube_agent.main._initialized", True),
+        patch("youtube_agent.main.run_agent", new_callable=AsyncMock, return_value=mock_response) as mock_run,
+    ):
         result = await handler(messages)
 
     # Verify run_agent was called
@@ -56,10 +61,12 @@ async def test_handler_initialization():
     mock_response.status = "COMPLETED"
 
     # Start with _initialized as False to test initialization path
-    with patch("youtube_agent.main._initialized", False), \
-         patch("youtube_agent.main.initialize_agent", new_callable=AsyncMock) as mock_init, \
-         patch("youtube_agent.main.run_agent", new_callable=AsyncMock, return_value=mock_response) as mock_run, \
-         patch("youtube_agent.main._init_lock", new_callable=MagicMock()) as mock_lock:
+    with (
+        patch("youtube_agent.main._initialized", False),
+        patch("youtube_agent.main.initialize_agent", new_callable=AsyncMock) as mock_init,
+        patch("youtube_agent.main.run_agent", new_callable=AsyncMock, return_value=mock_response) as mock_run,
+        patch("youtube_agent.main._init_lock", new_callable=MagicMock()) as mock_lock,
+    ):
         # Configure the lock to work as an async context manager
         mock_lock_instance = MagicMock()
         mock_lock_instance.__aenter__ = AsyncMock(return_value=None)
@@ -86,10 +93,12 @@ async def test_handler_race_condition_prevention():
     mock_response = MagicMock()
 
     # Test with multiple concurrent calls
-    with patch("youtube_agent.main._initialized", False), \
-         patch("youtube_agent.main.initialize_agent", new_callable=AsyncMock) as mock_init, \
-         patch("youtube_agent.main.run_agent", new_callable=AsyncMock, return_value=mock_response), \
-         patch("youtube_agent.main._init_lock", new_callable=MagicMock()) as mock_lock:
+    with (
+        patch("youtube_agent.main._initialized", False),
+        patch("youtube_agent.main.initialize_agent", new_callable=AsyncMock) as mock_init,
+        patch("youtube_agent.main.run_agent", new_callable=AsyncMock, return_value=mock_response),
+        patch("youtube_agent.main._init_lock", new_callable=MagicMock()) as mock_lock,
+    ):
         # Configure the lock to work as an async context manager
         mock_lock_instance = MagicMock()
         mock_lock_instance.__aenter__ = AsyncMock(return_value=None)
@@ -118,8 +127,10 @@ async def test_handler_with_youtube_query():
     mock_response.run_id = "youtube-run-id"
     mock_response.content = "YouTube video analysis completed successfully."
 
-    with patch("youtube_agent.main._initialized", True), \
-         patch("youtube_agent.main.run_agent", new_callable=AsyncMock, return_value=mock_response):
+    with (
+        patch("youtube_agent.main._initialized", True),
+        patch("youtube_agent.main.run_agent", new_callable=AsyncMock, return_value=mock_response),
+    ):
         result = await handler(messages)
 
     assert result is not None
@@ -137,11 +148,13 @@ async def test_handler_requires_api_key():
     mock_lock_instance.__aenter__ = AsyncMock(return_value=None)
     mock_lock_instance.__aexit__ = AsyncMock(return_value=None)
 
-    with patch("youtube_agent.main._initialized", False), \
-         patch("youtube_agent.main.initialize_agent", side_effect=APIKeyError("No API key")), \
-         patch("youtube_agent.main._init_lock", return_value=mock_lock_instance), \
-         patch("youtube_agent.main.run_agent", new_callable=AsyncMock), \
-         pytest.raises(APIKeyError, match="No API key"):
+    with (
+        patch("youtube_agent.main._initialized", False),
+        patch("youtube_agent.main.initialize_agent", side_effect=APIKeyError("No API key")),
+        patch("youtube_agent.main._init_lock", return_value=mock_lock_instance),
+        patch("youtube_agent.main.run_agent", new_callable=AsyncMock),
+        pytest.raises(APIKeyError, match="No API key"),
+    ):
         await handler(messages)
 
 
@@ -150,9 +163,11 @@ async def test_handler_agent_not_initialized():
     """Test that handler raises error when agent is not initialized."""
     messages = [{"role": "user", "content": "Test"}]
 
-    with patch("youtube_agent.main._initialized", True), \
-         patch("youtube_agent.main.run_agent", side_effect=RuntimeError("Agent not initialized")), \
-         pytest.raises(RuntimeError, match="Agent not initialized"):
+    with (
+        patch("youtube_agent.main._initialized", True),
+        patch("youtube_agent.main.run_agent", side_effect=RuntimeError("Agent not initialized")),
+        pytest.raises(RuntimeError, match="Agent not initialized"),
+    ):
         await handler(messages)
 
 
@@ -170,8 +185,10 @@ async def test_handler_with_lecture_analysis_query():
     mock_response.run_id = "lecture-run-id"
     mock_response.content = "Lecture analysis generated."
 
-    with patch("youtube_agent.main._initialized", True), \
-         patch("youtube_agent.main.run_agent", new_callable=AsyncMock, return_value=mock_response):
+    with (
+        patch("youtube_agent.main._initialized", True),
+        patch("youtube_agent.main.run_agent", new_callable=AsyncMock, return_value=mock_response),
+    ):
         result = await handler(messages)
 
     assert result is not None
@@ -193,8 +210,10 @@ async def test_handler_with_tutorial_analysis_query():
     mock_response.run_id = "tutorial-run-id"
     mock_response.content = "Tutorial analysis completed."
 
-    with patch("youtube_agent.main._initialized", True), \
-         patch("youtube_agent.main.run_agent", new_callable=AsyncMock, return_value=mock_response):
+    with (
+        patch("youtube_agent.main._initialized", True),
+        patch("youtube_agent.main.run_agent", new_callable=AsyncMock, return_value=mock_response),
+    ):
         result = await handler(messages)
 
     assert result is not None

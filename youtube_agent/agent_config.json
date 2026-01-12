@@ -1,45 +1,49 @@
 {
-    "author": "paras25619@gmail.com",
-    "name": "youtube-agent",
-    "description": "AI-powered agent that analyzes YouTube videos and creates structured summaries with accurate timestamps. Extracts key insights from video content for easy navigation of educational videos, tutorials, and presentations.",
-    "version": "1.0.0",
-    "recreate_keys": false,
-    "skills": [
-        "skills/youtube"
+  "author": "paras25619@gmail.com",
+  "name": "youtube-agent",
+  "description": "AI-powered agent that analyzes YouTube videos and creates structured summaries with accurate timestamps. Extracts key insights from video content for easy navigation of educational videos, tutorials, and presentations.",
+  "version": "1.0.0",
+  "recreate_keys": false,
+  "skills": [
+    "skills/youtube"
+  ],
+  "capabilities": {},
+  "agent_trust": "low",
+  "debug_mode": true,
+  "debug_level": 2,
+  "deployment": {
+    "url": "http://127.0.0.1:3773",
+    "expose": true,
+    "protocol_version": "1.0.0",
+    "proxy_urls": [
+      "127.0.0.1"
     ],
-    "capabilities": {},
-    "agent_trust": "low",
-    "debug_mode": true,
-    "debug_level": 2,
-    "deployment": {
-        "url": "http://127.0.0.1:3773",
-        "expose": true,
-        "protocol_version": "1.0.0",
-        "proxy_urls": ["127.0.0.1"],
-        "cors_origins": ["*"]
-    },
-    "storage": {
-        "type": "memory"
-    },
-    "scheduler": {
-        "type": "memory"
-    },
-    "num_history_sessions": 5,
-    "environment_variables": [
-        {
-            "key": "OPENROUTER_API_KEY",
-            "description": "OpenRouter API key for LLM calls (required)",
-            "required": true
-        },
-        {
-            "key": "MODEL_NAME",
-            "description": "Model ID for OpenRouter (default: openai/gpt-4o)",
-            "required": false
-        },
-        {
-            "key": "MEM0_API_KEY",
-            "description": "Mem0 API key for conversation memory",
-            "required": false
-        }
+    "cors_origins": [
+      "*"
     ]
+  },
+  "storage": {
+    "type": "memory"
+  },
+  "scheduler": {
+    "type": "memory"
+  },
+  "num_history_sessions": 5,
+  "environment_variables": [
+    {
+      "key": "OPENROUTER_API_KEY",
+      "description": "OpenRouter API key for LLM calls (required)",
+      "required": true
+    },
+    {
+      "key": "MODEL_NAME",
+      "description": "Model ID for OpenRouter (default: openai/gpt-4o)",
+      "required": false
+    },
+    {
+      "key": "MEM0_API_KEY",
+      "description": "Mem0 API key for conversation memory",
+      "required": false
+    }
+  ]
 }

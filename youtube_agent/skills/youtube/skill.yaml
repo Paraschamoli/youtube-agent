@@ -309,7 +309,7 @@ documentation:
     Usage example:
     ```python
     from youtube_agent.main import handler
-    
+
     result = await handler([
         {"role": "user", "content": "Analyze this video: https://www.youtube.com/watch?v=zjkBMFhNj_g"}
     ])
