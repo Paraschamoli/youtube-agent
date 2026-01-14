@@ -37,7 +37,7 @@ classifiers = [
 [project.urls]
 Homepage = "https://Paraschamoli.github.io/youtube-agent/"
 Repository = "https://github.com/Paraschamoli/youtube-agent"
-Documentation = "https://Paraschamoli.github.io/youtube-agent/"
+Documentation = "https://github.com/Paraschamoli/youtube-agent#readme"
 Issues = "https://github.com/Paraschamoli/youtube-agent/issues"
 Changelog = "https://github.com/Paraschamoli/youtube-agent/releases"
 
