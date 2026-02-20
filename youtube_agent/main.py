@@ -240,7 +240,7 @@ async def run_agent(messages: list[dict[str, str]]) -> Any:
         error_msg = "Agent not initialized"
         raise RuntimeError(error_msg)
 
-    return await agent.arun(messages)
+    return await agent.arun(messages)  # type: ignore[invalid-await]
 
 
 async def handler(messages: list[dict[str, str]]) -> Any:
