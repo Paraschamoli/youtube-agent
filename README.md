@@ -57,6 +57,8 @@ An AI-powered agent that automatically analyzes YouTube videos and creates struc
 > **🌐 Join the Internet of Agents**
 > Register your agent at [bindus.directory](https://bindus.directory) to make it discoverable worldwide and enable agent-to-agent collaboration. **It takes 2 minutes and unlocks the full potential of your agent.**
 
+-> [Postman Collection link](https://raahul-1409c5b4-717533.postman.co/workspace/getbindu's-Workspace~44eb7cfe-a752-4114-8a1a-631395f07bf1/collection/50606358-1c8087bb-fdde-48f6-8773-6a664a209364?action=share&creator=50606358)
+
 ---
 
 ## 🚀 Quick Start
