@@ -5,26 +5,22 @@ author: paras25619@gmail.com
 
 # Description
 description: |
-  AI-powered YouTube video analysis and structured summarization skill.
-  Extracts transcripts, creates accurate timestamps, and generates comprehensive
-  summaries for educational videos, tutorials, lectures, and presentations.
-  Transforms unstructured video content into searchable, navigable knowledge.
+  Analyzes YouTube videos by extracting transcripts, generating structured summaries,
+  creating timestamped topic segmentation, and organizing content into navigable
+  knowledge artifacts. Provides hierarchical breakdowns, key takeaways, and
+  educational structuring for tutorials, lectures, reviews, and presentations.
 
 # Tags and Modes
 tags:
   - youtube
-  - video
-  - analysis
+  - video-analysis
   - transcript
   - summary
   - timestamps
   - education
   - tutorial
   - lecture
-  - content-analysis
-  - media-processing
-  - video-summarization
-  - learning
+  - structured-content
 
 input_modes:
   - text/plain
@@ -33,73 +29,50 @@ input_modes:
 output_modes:
   - text/plain
   - application/json
-  - text/markdown
 
 # Example Queries
 examples:
-  - "Analyze this video: https://www.youtube.com/watch?v=zjkBMFhNj_g"
-  - "Create a study guide from this lecture video with timestamps"
-  - "Extract key points from this tutorial and organize them by topic"
-  - "Summarize this documentary with chapter breakdowns"
-  - "Analyze this product review and list all features mentioned"
-  - "Break down this programming tutorial with code examples"
-  - "Create learning path from this educational course video"
-  - "Extract practical exercises from this fitness tutorial"
-  - "Summarize this conference talk with main arguments"
-  - "Analyze this cooking video with step-by-step instructions"
+  - "Analyze this YouTube video: https://www.youtube.com/watch?v=zjkBMFhNj_g"
+  - "Create a study guide from this lecture video"
+  - "Summarize this programming tutorial with timestamps"
+  - "Break down this educational video into structured sections"
 
 # Detailed Capabilities
 capabilities_detail:
-  video_analysis:
+  primary_capability:
     supported: true
-    description: "Comprehensive YouTube video analysis with transcript extraction"
+    description: "Transcript-based video analysis with structured timestamp segmentation"
     features:
-      - "YouTube video metadata extraction (title, duration, upload date)"
-      - "Automatic transcript fetching and parsing"
-      - "Video type identification (tutorial, lecture, review, etc.)"
-      - "Content structure and theme analysis"
-      - "Presenter style and audience targeting detection"
-    limitations: "Requires valid YouTube URLs, depends on transcript availability"
+      - "Extracts transcript from public YouTube videos"
+      - "Generates logical topic segmentation"
+      - "Creates accurate HH:MM:SS timestamps"
+      - "Produces structured hierarchical summaries"
+      - "Identifies key concepts and main arguments"
+      - "Extracts actionable takeaways"
+    limitations: |
+      Requires publicly accessible videos with available transcripts.
+      Does not perform visual frame analysis or live-stream processing.
 
-  timestamp_generation:
+  secondary_capability:
     supported: true
-    description: "Accurate timestamp creation for major topic transitions"
+    description: "Educational transformation and structured knowledge generation"
     features:
-      - "Precise timestamp generation in HH:MM:SS format"
-      - "Logical topic segmentation and transition detection"
-      - "Key moment highlighting (demonstrations, examples, explanations)"
-      - "Educational content prioritization"
-      - "Timestamp verification against transcript"
-    limitations: "Accuracy depends on transcript quality and speaker clarity"
-
-  structured_summarization:
-    supported: true
-    description: "Hierarchical content organization and summarization"
-    features:
-      - "Multi-level content organization: Chapters → Sections → Key Points"
-      - "Content type classification with emoji indicators"
-      - "Practical takeaways and actionable insights extraction"
-      - "Resource and reference identification"
-      - "Difficulty level and prerequisite assessment"
-    limitations: "Summarization depth depends on video length and complexity"
+      - "Creates study guides from lecture content"
+      - "Extracts step-by-step procedures from tutorials"
+      - "Identifies prerequisites and difficulty level"
+      - "Organizes content into chapters and sub-sections"
+      - "Provides content quality and structure assessment"
 
 # Requirements
 requirements:
   packages:
-    - "agno>=2.2.0"
-    - "openai>=2.11.0"
-    - "youtube-transcript-api>=0.6.2"
-    - "mem0ai>=1.0.1"
-    - "sqlalchemy>=2.0.45"
-    - "python-dotenv>=1.0.1"
+    - "agno"
+    - "youtube-transcript-api"
+    - "openrouter"
+    - "mem0"
   system:
-    - "Python 3.12 or higher"
-    - "Internet access for YouTube API and transcript fetching"
+    - "Internet access for transcript retrieval"
   min_memory_mb: 512
-  external_services:
-    - "OpenRouter API (required for LLM)"
-    - "Mem0 API (optional for conversation memory)"
-    - "YouTube (video access and transcripts)"
 
 # Performance Metrics
 performance:
@@ -110,278 +83,190 @@ performance:
 
 # Tool Restrictions
 allowed_tools:
-  - YouTubeTools
-  - Mem0Tools
-  - Analyze
-  - Extract
-  - Summarize
   - Read
+  - Extract
+  - Analyze
+  - Summarize
+  - Write
 
 # Rich Documentation
 documentation:
   overview: |
-    This skill provides advanced YouTube video analysis capabilities by combining
-    YouTube transcript extraction with AI-powered content analysis. It transforms
-    long-form video content into structured, searchable knowledge with accurate
-    timestamps, making educational videos, tutorials, and lectures easily navigable.
+    This skill provides structured YouTube video analysis using transcript extraction
+    and AI-powered segmentation. It transforms long-form video content into organized,
+    timestamped knowledge sections suitable for study, indexing, research, and
+    documentation workflows.
 
-    The skill fetches video transcripts using YouTube's APIs, analyzes content
-    structure, identifies key topics and transitions, and generates comprehensive
-    summaries organized by timestamps and content categories. It supports various
-    video types including educational content, tutorials, reviews, documentaries,
-    and presentations.
+    Built on the Agno framework with OpenRouter for language model reasoning
+    and optional Mem0 for session memory.
 
   use_cases:
     when_to_use:
-      - "Creating study guides from educational lecture videos"
-      - "Extracting key information from tutorial and how-to videos"
-      - "Building searchable indexes of educational content"
-      - "Generating documentation from conference talks and presentations"
-      - "Analyzing product reviews for feature comparisons"
-      - "Creating learning paths from course video series"
-      - "Extracting recipes or instructions from demonstration videos"
-      - "Research analysis of video content for academic studies"
-      - "Content planning by analyzing competitor video structures"
-      - "Accessibility enhancement by creating text alternatives to videos"
+      - "Summarizing educational videos"
+      - "Creating study guides from lectures"
+      - "Breaking down programming tutorials"
+      - "Extracting procedural steps from demonstrations"
+      - "Generating timestamped chapter breakdowns"
+      - "Indexing long-form video content for searchability"
 
     when_not_to_use:
-      - "Real-time video processing or live stream analysis"
+      - "Live stream monitoring"
       - "Video editing or manipulation"
-      - "Copyright infringement or unauthorized content extraction"
-      - "Bypassing YouTube's terms of service or content restrictions"
-      - "Mass downloading or archiving of video content"
-      - "Content that requires visual analysis (facial recognition, object detection)"
-      - "Videos without transcripts or closed captions"
-      - "Content in unsupported languages"
+      - "Visual recognition or object detection"
+      - "Private or restricted videos"
+      - "Mass content downloading or archival"
+      - "Videos without available transcripts"
 
   input_structure: |
-    Accepts YouTube video URLs or analysis requests:
+    Accepts YouTube URLs or structured JSON input.
 
-    Plain text YouTube URL:
-    "https://www.youtube.com/watch?v=zjkBMFhNj_g"
+    Example (Plain Text):
+    "Analyze this video: https://www.youtube.com/watch?v=zjkBMFhNj_g"
 
-    JSON format with analysis options:
+    Example (JSON):
     {
       "url": "https://www.youtube.com/watch?v=zjkBMFhNj_g",
-      "analysis_options": {
-        "detail_level": "comprehensive",
-        "include_timestamps": true,
-        "include_transcript": false,
-        "focus_areas": ["technical", "practical"],
-        "output_format": "markdown"
-      }
+      "focus": "summary | study_guide | steps | full",
+      "detail_level": "basic | standard | comprehensive",
+      "include_timestamps": true
     }
 
     Constraints:
-    - Valid YouTube URLs only (youtube.com or youtu.be)
-    - Maximum video length: 4 hours (for performance reasons)
-    - Public videos with available transcripts
-    - Timeout: 120 seconds for analysis completion
+    - Must contain a valid YouTube URL
+    - Publicly accessible video only
+    - Transcript must be available
+    - One video per request
+    - Maximum recommended duration: ~4 hours
+    - Input language must match transcript language
 
   output_format: |
-    Standard Video Analysis Output:
+    Returns structured analysis with standardized sections.
 
-    {
-      "video_metadata": {
-        "title": "Video Title",
-        "url": "https://www.youtube.com/watch?v=...",
-        "duration": "01:23:45",
-        "upload_date": "2024-01-15",
-        "channel": "Channel Name",
-        "video_type": "educational_tutorial",
-        "estimated_difficulty": "intermediate"
-      },
-      "analysis_summary": {
-        "main_topics": ["Topic 1", "Topic 2", "Topic 3"],
-        "content_structure": "progressive_tutorial",
-        "key_learning_objectives": ["Objective 1", "Objective 2"],
-        "practical_applications": ["Application 1", "Application 2"]
-      },
-      "timestamped_sections": [
-        {
-          "start_time": "00:00:00",
-          "end_time": "00:15:30",
-          "title": "Introduction and Overview",
-          "summary": "Detailed summary of section content...",
-          "key_points": ["Point 1", "Point 2", "Point 3"],
-          "content_type": "📚 Educational",
-          "difficulty": "beginner"
-        }
-      ],
-      "resources_mentioned": [
-        {
-          "type": "website",
-          "name": "Official Documentation",
-          "url": "https://docs.example.com"
-        }
-      ],
-      "analysis_metadata": {
-        "processing_time_ms": 45200,
-        "transcript_available": true,
-        "sections_count": 8,
-        "analysis_completeness": "high"
-      }
-    }
+    Output Structure:
+    - VIDEO SUMMARY: Brief summary (< 30 words)
+    - VIDEO METADATA:
+      - TITLE
+      - CHANNEL
+      - DURATION
+      - VIDEO TYPE
+      - DIFFICULTY LEVEL
+    - MAIN TOPICS: List of primary topics discussed
+    - TIMESTAMPED SECTIONS: For each section:
+      - START TIME (HH:MM:SS)
+      - END TIME (HH:MM:SS)
+      - SECTION TITLE
+      - SECTION SUMMARY
+      - KEY POINTS
+    - KEY TAKEAWAYS: Practical insights and conclusions
+    - STRUCTURE ASSESSMENT:
+      - CONTENT ORGANIZATION (High/Medium/Low)
+      - INFORMATION DENSITY (High/Medium/Low)
+      - CLARITY LEVEL (High/Medium/Low)
+    - ANALYSIS METADATA:
+      - TRANSCRIPT AVAILABLE (true/false)
+      - SECTIONS GENERATED (integer)
+      - PROCESSING TIME (ms)
 
   error_handling:
-    - "Invalid URLs: Return clear error with format guidance"
-    - "Transcript unavailable: Attempt alternative analysis or return error"
-    - "Rate limiting: Implement exponential backoff for YouTube API"
-    - "Video length exceeded: Return error with maximum length information"
-    - "Private/unlisted videos: Return access error"
-    - "Processing timeout: Return partial results with explanation"
-    - "Language unsupported: Return error with supported languages list"
+    - "Invalid URL: Returns error requesting valid YouTube link"
+    - "Transcript unavailable: Returns transcript_unavailable message"
+    - "Video too long: Returns duration_limit_exceeded error"
+    - "Private/restricted video: Returns access_denied error"
+    - "No transcript segments found: Returns analysis explaining limitation"
+    - "API timeout: Retries with exponential backoff, max 3 attempts"
 
   examples:
-    - title: "Educational Lecture Analysis"
+    - title: "Lecture Video Analysis"
       input:
         url: "https://www.youtube.com/watch?v=abc123"
-        analysis_options:
-          detail_level: "comprehensive"
-          include_timestamps: true
       output:
-        video_metadata:
-          title: "Introduction to Machine Learning"
-          duration: "01:15:30"
-          video_type: "educational_lecture"
-        analysis_summary:
-          main_topics: ["Supervised Learning", "Neural Networks", "Model Evaluation"]
-        timestamped_sections:
-          - start_time: "00:00:00"
-            end_time: "00:12:45"
-            title: "Course Introduction and Prerequisites"
-            content_type: "📚 Educational"
-        analysis_metadata:
-          processing_time_ms: 48000
-          sections_count: 6
+        video_summary: "Lecture explains core machine learning principles."
+        sections_generated: 6
+        processing_time_ms: 47000
 
-    - title: "Programming Tutorial Analysis"
+    - title: "Programming Tutorial Breakdown"
       input:
         url: "https://www.youtube.com/watch?v=def456"
+        focus: "steps"
       output:
-        video_metadata:
-          title: "Python Flask Web Development Tutorial"
-          duration: "00:45:20"
-          video_type: "technical_tutorial"
-        analysis_summary:
-          main_topics: ["Flask Setup", "Routing", "Database Integration"]
-          practical_applications: ["Build REST API", "Create Web Application"]
-        timestamped_sections:
-          - start_time: "00:15:30"
-            end_time: "00:25:15"
-            title: "Building Your First Flask Route"
-            content_type: "💻 Technical"
-            key_points: ["Install Flask", "Create app.py", "Define route decorators"]
-        analysis_metadata:
-          processing_time_ms: 38500
-          sections_count: 5
+        video_summary: "Tutorial demonstrates building REST API with Flask."
+        sections_generated: 5
+        processing_time_ms: 39000
 
   best_practices:
     for_developers:
-      - "Always respect YouTube's Terms of Service and API usage limits"
-      - "Implement caching for frequently analyzed videos to reduce API calls"
-      - "Provide clear attribution to original video content and creators"
-      - "Handle transcript language detection and encoding issues"
-      - "Implement fallback mechanisms when transcripts are incomplete"
-      - "Monitor YouTube API quota usage and implement rate limiting"
-      - "Test with various video types and lengths for robustness"
-      - "Provide clear error messages for common failure scenarios"
+      - "Validate URL format before processing"
+      - "Implement transcript caching for repeated requests"
+      - "Respect YouTube rate limits"
+      - "Gracefully handle incomplete transcript segments"
+      - "Provide attribution to original creators"
 
     for_orchestrators:
-      - "Route YouTube video analysis requests to this skill"
-      - "Validate YouTube URLs before forwarding to the skill"
-      - "Cache analysis results for identical video URLs"
-      - "Monitor analysis success rates and video length distributions"
-      - "Chain with text processing skills for enhanced content analysis"
-      - "Use for educational content indexing and learning management systems"
-      - "Implement quality checks for generated timestamps and summaries"
-      - "Consider video length when allocating processing resources"
+      - "Route YouTube URLs to this skill"
+      - "Apply concurrency limit of 2 requests"
+      - "Implement 120-second timeout policy"
+      - "Cache results for identical URLs"
+      - "Avoid routing non-transcript-based video tasks here"
 
   installation: |
+    Installation instructions for the youtube agent.
+
     Required packages:
-    pip install agno openai youtube-transcript-api mem0ai sqlalchemy python-dotenv
+    uv sync
 
     Environment variables:
-    OPENROUTER_API_KEY=your_openrouter_api_key      # Required for LLM
-    MEM0_API_KEY=your_mem0_api_key                  # Optional for memory
-    MODEL_NAME=openai/gpt-4o                        # Optional model specification
+    - OPENROUTER_API_KEY: Required for LLM processing
+    - MEM0_API_KEY: Optional for conversation memory
 
-    Usage example:
-    ```python
-    from youtube_agent.main import handler
-
-    result = await handler([
-        {"role": "user", "content": "Analyze this video: https://www.youtube.com/watch?v=zjkBMFhNj_g"}
-    ])
-    ```
+    Quick start:
+    1. Clone repository
+    2. Add environment variables
+    3. Run: uv venv --python 3.12 && source .venv/bin/activate
+    4. Run: uv sync
+    5. Start agent: python -m youtube_agent.main
 
   versioning:
     - version: "1.0.0"
       date: "2026-01-12"
-      changes: "Initial release with YouTube transcript analysis, timestamp generation, and structured summarization capabilities"
+      changes: "Initial release with transcript extraction, timestamp segmentation, and structured summarization"
 
 # Assessment fields for skill negotiation
 assessment:
   keywords:
     - "youtube"
-    - "video"
-    - "analyze"
+    - "video analysis"
     - "transcript"
-    - "summary"
-    - "timestamps"
-    - "lecture"
-    - "tutorial"
-    - "educational"
-    - "content"
-    - "extract"
-    - "summarize"
-    - "organize"
-    - "navigate"
-    - "study"
-    - "learn"
-    - "guide"
-    - "breakdown"
-    - "metadata"
-    - "structure"
-    - "chapters"
-    - "sections"
+    - "timestamp"
+    - "lecture breakdown"
+    - "tutorial summary"
+    - "study guide"
+    - "video segmentation"
+    - "content structuring"
 
   specializations:
-    - domain: "youtube_video_analysis"
+    - domain: "educational videos"
       confidence_boost: 0.4
-    - domain: "educational_content_processing"
+    - domain: "tutorial content"
       confidence_boost: 0.3
-    - domain: "media_transcript_analysis"
-      confidence_boost: 0.2
-    - domain: "content_summarization"
-      confidence_boost: 0.1
+    - domain: "lecture analysis"
+      confidence_boost: 0.3
 
   anti_patterns:
-    - "image_processing"
-    - "audio_only_analysis"
-    - "live_stream_processing"
-    - "video_editing"
-    - "copyright_bypass"
-    - "mass_downloading"
-    - "visual_analysis"
-    - "real_time_processing"
-    - "social_media_scraping"
-    - "web_page_analysis"
+    - "summarize this document"
+    - "write a blog post"
+    - "edit this video"
+    - "generate creative script"
+    - "image recognition"
+    - "live stream monitoring"
 
   complexity_indicators:
     simple:
       - "short video summary"
       - "basic metadata extraction"
-      - "transcript availability check"
-      - "video type identification"
     medium:
-      - "structured timestamp generation"
-      - "topic segmentation"
-      - "educational content analysis"
-      - "tutorial step extraction"
+      - "timestamp segmentation"
+      - "topic structuring"
     complex:
       - "multi-video course analysis"
-      - "advanced content categorization"
       - "learning path creation"
-      - "comparative video analysis"
-      - "research-grade content extraction"
+      - "comparative video breakdown"
