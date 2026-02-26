@@ -31,7 +31,7 @@ FROM raahulrahl/bindu-runtime-base:latest
 # OCI labels
 LABEL org.opencontainers.image.title="youtube-agent"
 LABEL org.opencontainers.image.description="An AI-powered agent that searches, analyzes, and extracts structured insights from YouTube videos. It can find relevant videos, summarize content, extract key points or timestamps, identify speakers or topics, and transform unstructured video information into clean, usable data for research, learning, or content analysis."
-LABEL org.opencontainers.image.authors="Paras Chamoli <paras25619@gmail.com>"
+LABEL org.opencontainers.image.authors="Paras Chamoli <paras@getbindu.com>"
 LABEL org.opencontainers.image.version="1.0.0"
 LABEL org.opencontainers.image.source="https://github.com/Paraschamoli/youtube-agent"
 LABEL org.opencontainers.image.licenses="MIT"

@@ -2,12 +2,12 @@
 name = "youtube-agent"
 version = "0.1.0"
 description = "AI-powered agent that analyzes YouTube videos and creates structured summaries with accurate timestamps. Extracts key insights from video content for easy navigation of educational videos, tutorials, and presentations."
-authors = [{ name = "Paras Chamoli", email = "paras25619@gmail.com" }]
+authors = [{ name = "Paras Chamoli", email = "paras@getbindu.com" }]
 readme = "README.md"
 keywords = ["python", "ai", "youtube", "video", "analysis", "transcript", "summary", "timestamps", "bindu", "mem0"]
 requires-python = ">=3.12,<3.13"
 dependencies = [
-    "bindu==2026.9.2.2",
+    "bindu==2026.9.4",
     "agno>=2.2.0",
     "openai>=2.11.0",
     "youtube-transcript-api>=0.6.2",
