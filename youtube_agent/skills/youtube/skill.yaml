@@ -107,13 +107,13 @@ documentation:
   overview: |
     This agent analyzes YouTube videos by extracting transcripts via YouTubeTools
     and generating structured summaries using OpenRouter LLM (default: openai/gpt-4o).
-    
+
     Built on Agno framework with:
     - YouTubeTools for transcript extraction (youtube-transcript-api)
     - OpenRouter for LLM inference with response caching
     - Optional Mem0Tools for conversation memory
     - bindufy wrapper for JSON-RPC 2.0 server
-    
+
     Agent uses lazy initialization (initializes on first request) and supports
     async task processing. Markdown output enabled by default.
 
@@ -203,7 +203,7 @@ documentation:
     - "Transcript unavailable: Handled by YouTubeTools, may return error message"
     - "Invalid URL: Handled by LLM or YouTubeTools"
     - "Mem0 initialization failure: Logs warning, continues without memory"
-  
+
   error_handling_notes: |
     Error handling primarily delegated to YouTubeTools and LLM.
     Agent uses lazy initialization with asyncio lock for thread safety.
@@ -307,5 +307,5 @@ assessment:
       - "Not supported: multi-video analysis"
       - "Not supported: learning path creation"
       - "Not supported: comparative analysis"
-    
+
     note: "Agent processes one video per request. Multi-video tasks not implemented."
