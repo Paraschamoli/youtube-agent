@@ -203,8 +203,9 @@ documentation:
     - "Transcript unavailable: Handled by YouTubeTools, may return error message"
     - "Invalid URL: Handled by LLM or YouTubeTools"
     - "Mem0 initialization failure: Logs warning, continues without memory"
-    
-    Note: Error handling primarily delegated to YouTubeTools and LLM.
+  
+  error_handling_notes: |
+    Error handling primarily delegated to YouTubeTools and LLM.
     Agent uses lazy initialization with asyncio lock for thread safety.
 
   examples:
